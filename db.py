@@ -29,7 +29,3 @@ def send_app():
     except Exception as e:
         print("many error")
         print("errore:" + str(e))
-
-if __name__ == '__main__':
-    app.debug = True
-    app.run()
