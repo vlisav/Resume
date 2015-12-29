@@ -1,1 +1,1 @@
-web: python db:app --log-file=-
+web: python db.py --log-file=-
