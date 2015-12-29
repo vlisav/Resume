@@ -1,6 +1,10 @@
 import psycopg2
+import os.path
 from flask import *
 app = Flask(__name__)
+
+def root_dir():  # pragma: no cover
+    return os.path.abspath(os.path.dirname(__file__))
 
 @app.route('/test')
 def hello_world():
@@ -25,7 +29,12 @@ def hello_world():
 @app.route('/app')
 def send_app():
     try:
-        return send_from_directory("C:/Project\Resume","page.html", as_attachment=False)
+        return send_from_directory(root_dir(),"page.html", as_attachment=False)
     except Exception as e:
         print("many error")
+        print(root_dir())
         print("errore:" + str(e))
+
+if __name__ == '__main__':
+    app.debug = True
+    app.run()
