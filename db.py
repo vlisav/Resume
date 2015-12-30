@@ -2,8 +2,13 @@ import psycopg2
 import os.path
 from flask import *
 app = Flask(__name__)
+
 app.config.from_object('config-test')
-app.config.from_envvar('PYTHON_DEV_CONFIG')
+
+try:
+    app.config.from_envvar('PYTHON_DEV_CONFIG')
+except:
+    print("weoweo error I dont care")
 
 def root_dir():  # pragma: no cover
     return os.path.abspath(os.path.dirname(__file__))
