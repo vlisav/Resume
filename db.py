@@ -31,7 +31,7 @@ def hello_world():
     for row in rows:
         print ("   ", row[0])
         print ("   ", row[1])
-    return row[0]
+    return row[1]
 
 @app.route('/app')
 def send_app():
