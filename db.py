@@ -2,6 +2,8 @@ import psycopg2
 import os.path
 from flask import *
 app = Flask(__name__)
+app.config.from_object('config-test')
+app.config.from_envvar('PYTHON_DEV_CONFIG')
 
 def root_dir():  # pragma: no cover
     return os.path.abspath(os.path.dirname(__file__))
@@ -9,7 +11,7 @@ def root_dir():  # pragma: no cover
 @app.route('/test')
 def hello_world():
     try:
-        conn = psycopg2.connect("dbname='postgres' user='postgres' host='localhost' password='Highter95'")
+        conn = psycopg2.connect(app.config['DBCONN'])
         print ("Connected much very good")
     except:
         print ("I am unable to connect to the database")
@@ -29,6 +31,8 @@ def hello_world():
 @app.route('/app')
 def send_app():
     try:
+        print(app.config['TESTVAR'])
+        print(app.config['TESTVAR2'])
         return send_from_directory(root_dir(),"page.html", as_attachment=False)
     except Exception as e:
         print("many error")
